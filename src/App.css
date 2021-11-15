@@ -1,0 +1,153 @@
+*{
+  margin:0;
+  padding:0;
+}
+.container{
+  background: linear-gradient(45deg,#823ba3,#e374e7,#6e115f,#3e32a7);
+  width:100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.app-wrapper{
+  background-color: #fff;
+  min-width: 550px;
+  min-height:700px;
+  padding:30px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.title{
+  color:#6e115f;
+  text-align: center;
+  margin:80px 0px 40px 0px;
+}
+.title2{
+  color:#6e115f;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.name,.email,.password{
+  margin: 20px;
+  color: #969292;
+  font-size: 16px;
+}
+.password{
+  margin-bottom: 40px;
+}
+.class-password{
+  min-width: 200px;
+  min-height:50px;
+  box-sizing: border-box;
+  margin-bottom:10px;
+  
+}
+.home-wrapper{
+  background-color: #fff;
+  width: 550px;
+  min-height:700px;
+  padding:30px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.label{
+  font-size: 15px;
+  font-weight: bold;
+  width: 150px;
+  text-align: left;
+  margin-right:135px;
+}
+
+.input{
+  height:32px;
+  font-size: 20px;
+  outline: none;
+  width:100%;
+  border-style: none none 2px solid black none;
+  margin-bottom: 10px;
+}
+.register-text{
+  text-align: center;
+  color:#6e115f;
+  font-size: 15px;
+  margin-top: 80px;
+  margin-bottom:40px;
+  font-weight: bold;
+}
+.error{
+  color: red;
+  font-weight: bold;
+  font-size:11px;
+}
+.submit,.register{
+  display: flex;
+  text-transform: uppercase;
+  font-size: 20px;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 60px;
+  background: #6e115f;
+  margin:auto;
+  outline:none;
+  border:none;
+  cursor:pointer;
+  transition:all 0.1s
+}
+button:active{
+  transform:translateY(2px);
+}
+.form-success{
+  display:flex;
+  justify-content: center;
+  margin-top: 250px;
+  min-width:370px;
+  color: #2f614a;
+}
+nav{
+  height:50px;
+  text-align: right;
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+.link{
+  color:#823ba3;
+  padding:5px;
+}
+.btn{
+  background-color: #6e115f;
+  color:white;
+  min-width:120px;
+  border-radius: 15px;
+  color: white;
+  /* padding: 10px 60px; */
+  background: #6e115f;
+  margin:auto;
+  outline:none;
+  border:none;
+  cursor:pointer;
+}
+.btn2{
+  background-color: #6e115f;
+  color:white;
+  min-width:100px;
+  border-radius: 15px;
+  color: white;
+  background: #6e115f;
+  margin:auto;
+  outline:none;
+  border:none;
+  cursor:pointer;
+}
+.input-student{
+  outline: none;
+  width:70%;
+  margin-right:10px;
+  
+  
+
+}
