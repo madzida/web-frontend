@@ -7,16 +7,29 @@ const SignupForm=({submitForm})=>{
     password:"",
   });
   const [errors,setErrors]=useState({});
+  const [error1,setError1]=useState({msg:""});
+  const [error2,setError2]=useState({msg:""});
   const [dataIsCorrect,setDataIsCorrect]=useState(false);
   const handleFormSubmit=(e)=>{
 
-    fetch('http://localhost:3000/signup', {
+    fetch('/signup', {
         method: 'POST',
-        // We convert the React state to JSON and send it as the POST body
+        headers:{
+          'Content-Type':'application/json'
+        },
+        credentials: 'same-origin',
         body: JSON.stringify(values)
       }).then(function(response) {
         console.log("the response is"+response)
         return response.json();
+      }).then(data=>{
+          if(data.err){
+            setError1({msg:data.err})
+          }else if(data.err3){
+            setError2({msg:data.err3})
+          }else{
+            window.location.href = "/home";
+          }
       });
       
     e.preventDefault();

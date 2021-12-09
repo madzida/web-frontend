@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 const Login=()=>{
+  const [error, setError] = React.useState({msg:''});
   const [values,setValues]=useState({
     email:"",
     password:""
   });
   const handleFormSubmit=(e)=>{
-    fetch('http://localhost:3000/', {
+    fetch('/login', {
       method: 'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin',
       body: JSON.stringify(values)
     }).then(function(response) {
       return response.json();
+    }).then(data=>{
+      if(data.err){
+        setError({msg:data.err})
+      }else{
+        window.location.href="/home";
+      }
     });
     e.preventDefault();
   };

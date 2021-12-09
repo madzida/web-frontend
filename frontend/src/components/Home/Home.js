@@ -9,9 +9,13 @@ const Home=()=>{
   const handleFormSubmit=(e)=>{
     e.preventDefault();
     setPassword({...password,password:Math.random().toString(36).substring(2, 6)});
-    fetch('http://localhost:3000/home', {
+    fetch('/home', {
       method: 'POST',
-      body: JSON.stringify({values,password})
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({password})
     }).then(function(response) {
       return (response.json());
     });
@@ -31,14 +35,21 @@ const Home=()=>{
     list.splice(index,1);
     setValues(list);
   }
+  const addingStudent=()=>{
+    window.location.href="/add";
+  }
+  const deletingStudent=()=>{
+    window.location.href="/delete";
+  }
   return (
-  <div className="container">
-    <div className="home-wrapper">
+  <div>
+    <div>
     <div><Header/></div>
-    <h2 className="title2">Dobrodošli</h2>
-    <h2>Lozinka razreda je: {password.password}</h2>
+    <h1 className="title2">Dobrodošli</h1>
     <hr/>
-      <h4>Učenici</h4>
+    <p>Kada završite s unosom učenika stisnite predaj i dobit ćete lozinku</p>
+    <h2>Lozinka razreda je: {password.password}</h2>
+{/*       <h4>Učenici</h4>
       {values.map((x,index)=>{
         return(
           <div key={index}>
@@ -50,9 +61,11 @@ const Home=()=>{
             </div>
         )
         })
-      }
-      <button className="btn"onClick={addStudent}>Dodaj učenika</button>
-      <div>
+      } */}
+      {/* <button className="btn"onClick={addStudent}>Dodaj učenika</button> */}
+      <div className="flex">
+      <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
+      <button className="submit" onClick={deletingStudent}>Obriši učenika</button>
       <button className="submit" onClick={handleFormSubmit}>Predaj</button>
       </div>
   </div>
