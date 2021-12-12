@@ -11,13 +11,12 @@ const DeleteStudent =()=>{
   const [students,setStudents]=useState({list:[]});
   //ovdje nisam jos nista jer moram vidit kakv ce bit back da znm napravit
   useEffect(async()=>{
-    await(fetch('/student/remove', {
+    await(fetch('/students', {
       method: 'GET',
       headers:{
         'Content-Type':'application/json'
       },
       credentials: 'same-origin',
-      body: JSON.stringify({values})
     })).then(function(response) {
       return response.json();
     }).then(data=>{
@@ -25,7 +24,7 @@ const DeleteStudent =()=>{
         console.log(data)
        for(var i=0;i<data.students.length;i++){
         list[i]=data.students[i].name;
-        setStations({list:list});
+        setStudents({list:list});
        }}
        catch{
          console.log(data)
@@ -37,15 +36,30 @@ const DeleteStudent =()=>{
       ...values,
       [e.target.name]:e.target.value,});
   };
+  const deleteStudent=()=>{
+    fetch("/student/remove",{
+      method: 'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({values})
+    }).then(function(response) {
+      return response.json();
+    })
+  }
 
-  return( <select id="dropdown" 
+  return(<div>
+    <select id="dropdown" 
   className="input2" 
   type="text" 
   name="delete" 
   value={values}
   onChange={handleChange}>
    {students.list.map((item,i) => <option key={i}>{item}</option>)}
-  </select>);
+  </select>
+  <button onClick={deleteStudent}>Obriši</button>
+  </div> );
 
 
 };
