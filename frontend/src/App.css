@@ -9,7 +9,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .app-wrapper{
   background-color: #fff;
@@ -153,4 +152,10 @@ nav{
   margin-top:100px;
   display: flex;
   flex-direction: row; 
+}
+.classContainer{
+  display: flex;
+  flex-direction: row; 
+  gap:35%;
+  justify-content: center;
 }

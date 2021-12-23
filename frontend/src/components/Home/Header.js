@@ -1,12 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 const Header =()=>{
+  const logout =()=>{
+    fetch('https://projekt-fer.herokuapp.com/logout', {
+      method: 'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin'
+    }).then(function(response) {
+      console.log("the response is"+JSON.stringify(response))
+      return response.json();
+    })
+    window.location.href="/"
+  }
   return(
     <nav>
       <div className="header">
-      <Link to={"/"} >
-        <p className="link">Odjavi se</p>
-      </Link>
+        <button className="link" onClick={logout}>Odjavi se</button>
       </div>
     </nav>
   );

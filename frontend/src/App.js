@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 import SignupForm from './components/Register/SignupForm';
 import AddStudent from './components/Students/AddStudent';
 import DeleteStudent from './components/Students/DeleteStudent';
+import Class from './components/Class/Class'
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/home' element={<Home/>}></Route>
           <Route exact path='/add' element={<AddStudent/>}></Route>
           <Route exact path='/delete' element={<DeleteStudent/>}></Route>
+          <Route exact path='/class' element={<Class/>}></Route>
        </Routes>
     </Router>
    

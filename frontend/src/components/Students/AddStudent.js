@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import valid from './valid';
 const AddStudent =()=>{
   const [values,setValues]=useState({
@@ -9,8 +9,7 @@ const AddStudent =()=>{
   });
   const [errors,setErrors]=useState({});
   const handleFormSubmit=(e)=>{
-
-    fetch('/student/add', {
+    fetch('https://projekt-fer.herokuapp.com/web/student/add', {
         method: 'POST',
         headers:{
           'Content-Type':'application/json'
@@ -24,17 +23,13 @@ const AddStudent =()=>{
       
     e.preventDefault();
     setErrors(valid(values));
-    if(Object.keys(errors).length ===0){
-      window.location.href="/home";
-    }
-/*     setErrors(validation(values));
-    setDataIsCorrect(true); */
+    //setDataIsCorrect(true);
   };
-/*   useEffect(()=>{
-    if(Object.keys(errors).length ===0 && dataIsCorrect){
-      submitForm(true);
+  useEffect(()=>{
+    if(Object.keys(errors).length ===0){
+      //window.location.href="/home"
     }
-  },[errors]); */
+  },[errors]);
   const handleChange=(e)=>{
     setValues({
       ...values,

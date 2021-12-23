@@ -7,21 +7,23 @@ const Login=()=>{
     password:""
   });
   const handleFormSubmit=(e)=>{
-    fetch('/login', {
+    fetch('https://projekt-fer.herokuapp.com/web/login', {
       method: 'POST',
       headers:{
         'Content-Type':'application/json'
       },
-      credentials: 'same-origin',
+      withCredentials: true,
       body: JSON.stringify(values)
     }).then(function(response) {
       return response.json();
     }).then(data=>{
+      console.log(data)
       if(data.err){
         setError({msg:data.err})
       }else{
-        window.location.href="/home";
+        window.location.href="/class";
       }
+      
     });
     e.preventDefault();
   };
@@ -52,6 +54,7 @@ const Login=()=>{
         name="password" 
         value={values.password}
         onChange={handleChange}/>
+        {error.msg && <p className='error'>{error.msg}</p>}
       </div>
       <div>
         <button className="submit" onClick={handleFormSubmit}>Prijavi se</button>

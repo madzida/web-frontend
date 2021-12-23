@@ -11,8 +11,9 @@ const SignupForm=({submitForm})=>{
   const [error2,setError2]=useState({msg:""});
   const [dataIsCorrect,setDataIsCorrect]=useState(false);
   const handleFormSubmit=(e)=>{
-
-    fetch('/signup', {
+    setError1({msg:""})
+    setError2({msg:""})
+    fetch('https://projekt-fer.herokuapp.com/web/signup', {
         method: 'POST',
         headers:{
           'Content-Type':'application/json'
@@ -20,25 +21,26 @@ const SignupForm=({submitForm})=>{
         credentials: 'same-origin',
         body: JSON.stringify(values)
       }).then(function(response) {
-        console.log("the response is"+response)
+        console.log("the response is"+JSON.stringify(response))
         return response.json();
       }).then(data=>{
+        console.log(data)
           if(data.err){
             setError1({msg:data.err})
           }else if(data.err3){
             setError2({msg:data.err3})
-          }else{
-            window.location.href = "/home";
+          }
+          else{
+            setDataIsCorrect(true);
           }
       });
       
     e.preventDefault();
     setErrors(validation(values));
-    setDataIsCorrect(true);
   };
   useEffect(()=>{
-    if(Object.keys(errors).length ===0 && dataIsCorrect){
-      submitForm(true);
+    if((Object.keys(errors).length ===0 && dataIsCorrect && !error1.msg && !error2.msg)){
+        window.location.href="/class"
     }
   },[errors]);
   const handleChange=(e)=>{
@@ -80,6 +82,8 @@ const SignupForm=({submitForm})=>{
         value={values.password}
         onChange={handleChange}/>
         {errors.password && <p className="error">{errors.password}</p>}
+        {error1.msg && <p className="error">{error1.msg}</p>}
+        {error2.msg && <p className="error">{error2.msg}</p>}
       </div>
       <div>
         <button className="submit" onClick={handleFormSubmit}>Registriraj se
