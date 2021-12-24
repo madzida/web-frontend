@@ -4,7 +4,10 @@ import Header from "../Home/Header";
 import 'react-datepicker/dist/react-datepicker.css'
 const Class=()=>{
   let navigate=useNavigate()
+  let location=useLocation()
+  let list=[];
   const [classname,setClassName]=useState({name:""});
+  const [classes,setClasses]=useState({list:[]});
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/teacherClass', {
       method: 'GET',
@@ -32,6 +35,17 @@ const Class=()=>{
       return (response.json())
     }).then(data=>{
       console.log(data)
+      try{
+        console.log(data)
+       for(var i=0;i<data.length;i++){
+        list[i]={
+
+        };
+        setClasses({list:list});
+       }}
+       catch{
+         console.log(data)
+       }
     });
   }
   const handleSubmit=(e)=>{
@@ -51,7 +65,8 @@ const Class=()=>{
     <h1 className="title2">Dobrodošli</h1>
     <hr/>
     <div className="classContainer">
-    <div className="flex">TU IDE LISTA RAZREDA
+    <div className="flex">
+    {classes.list.map((item,i) =><option key={i}>{item}</option>)}
     <button className="submit" onClick={()=>handleSubmit()} >Odaberi</button></div>
       <div className="flex">
       <form className="form-wrapper">

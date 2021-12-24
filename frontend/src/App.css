@@ -12,7 +12,7 @@
 }
 .app-wrapper{
   background-color: #fff;
-  min-width: 550px;
+  width: 550px;
   min-height:700px;
   padding:30px;
   box-sizing: border-box;

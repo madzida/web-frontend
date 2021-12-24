@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import {Link,useNavigate,createSearchParams} from 'react-router-dom';
 import validation from './validation';
 const SignupForm=({submitForm})=>{
+  let navigate=useNavigate()
   const [values,setValues]=useState({
     fullname:"",
     email:"",
@@ -40,7 +42,12 @@ const SignupForm=({submitForm})=>{
   };
   useEffect(()=>{
     if((Object.keys(errors).length ===0 && dataIsCorrect && !error1.msg && !error2.msg)){
-        window.location.href="/class"
+      navigate({
+        pathname: "/class",
+        search: `?${createSearchParams({
+            email: values.email
+        })}`
+    });
     }
   },[errors]);
   const handleChange=(e)=>{

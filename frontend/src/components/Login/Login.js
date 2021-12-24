@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate,createSearchParams} from 'react-router-dom';
 const Login=()=>{
+  let navigate=useNavigate()
   const [error, setError] = React.useState({msg:''});
   const [values,setValues]=useState({
     email:"",
     password:""
   });
+  let string=""
   const handleFormSubmit=(e)=>{
     fetch('https://projekt-fer.herokuapp.com/web/login', {
       method: 'POST',
@@ -21,7 +23,12 @@ const Login=()=>{
       if(data.err){
         setError({msg:data.err})
       }else{
-        window.location.href="/class";
+        navigate({
+          pathname: "/class",
+          search: `?${createSearchParams({
+              email: values.email
+          })}`
+      });
       }
       
     });
