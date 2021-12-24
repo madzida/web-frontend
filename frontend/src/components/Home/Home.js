@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
 import Header from "./Header";
 import 'react-datepicker/dist/react-datepicker.css'
 const Home=()=>{
+  let location=useLocation();
+  console.log(location)
   const [values,setValues]=useState({
     name:"",
     surname:"",
@@ -9,6 +12,25 @@ const Home=()=>{
     studentId:"",
   });
   let list=[];
+  const proba=[{
+    studentId:1,
+    name:"Mirta",
+    surname:"vucinic",
+    pictureKey:"bat.svg"
+  },
+  {
+    studentId:2,
+    name:"Jan",
+    surname:"Roland",
+    pictureKey:"bear.svg"
+  },
+  {
+    studentId:3,
+    name:"Davor",
+    surname:"vucinic",
+    pictureKey:"lion.svg"
+  }
+]
   const [students,setStudents]=useState({list:[]});
   const handleFormSubmit=(e)=>{
     e.preventDefault();
@@ -24,24 +46,25 @@ const Home=()=>{
     });
 
   };
-  useEffect(async()=>{
-    await(fetch('https://projekt-fer.herokuapp.com/web/class', {
+  useEffect(()=>{
+    fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state, {
       method: 'GET',
       headers:{
         'Content-Type':'application/json'
       },
       credentials: 'same-origin',
-    })).then(function(response) {
+    }).then(function(response) {
       return response.json();
     }).then(data=>{
       try{
-        console.log(data)
-       for(var i=0;i<data.length;i++){
-        list[i]={
-
-        };
+        console.log(proba)
+       for(var i=0;i<proba.length;i++){
+         console.log(proba[i].surname)
+         list[i]=proba[i]
+        
+       }
         setStudents({list:list});
-       }}
+      }
        catch{
          console.log(data)
        }
@@ -52,8 +75,10 @@ const Home=()=>{
       ...values,
       [e.target.name]:e.target.value,});
   };
-  const deleteStudent=()=>{
-    fetch("'https://projekt-fer.herokuapp.com/web/student/remove",{
+  const deleteStudent=(studentId)=>{
+    var elem = document.getElementById(studentId);
+    elem.parentNode.removeChild(elem);
+    fetch("https://projekt-fer.herokuapp.com/web/student/remove",{
       method: 'POST',
       headers:{
         'Content-Type':'application/json'
@@ -64,7 +89,7 @@ const Home=()=>{
       return response.json();
     })
   }
-  const editStudent=()=>{
+  const editStudent=(studentId)=>{
     fetch("'https://projekt-fer.herokuapp.com/web/student/edit",{
       method: 'POST',
       headers:{
@@ -88,10 +113,12 @@ const Home=()=>{
     <div><Header/></div>
     <h1 className="title2">Dobrodošli</h1>
     <hr/>
-    <div>   {/* {students.list.map((item,i) =><div><p key={i}>{item}</p> <button onClick={deleteStudent}>Obriši</button><button onClick={editStudent}>Uredi</button></div>)} */}</div>
-      <div className="flex">
+    <div className="classContainer">
+    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname}</p> <button className='link' onClick={()=>deleteStudent(item.studentId)}>Obriši</button><button className='link' onClick={()=>editStudent(item.studentId,i)}>Uredi</button></div>)}</div>
+      <div className="button-container">
       <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
       <button className="submit" onClick={handleFormSubmit}>Predaj</button>
+      </div>
       </div>
   </div>
   </div>);

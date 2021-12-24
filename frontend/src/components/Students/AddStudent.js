@@ -81,7 +81,7 @@ const AddStudent =()=>{
       value={values.slicica}
       onChange={handleChange}/>
       {errors.slicica && <p className="error">{errors.slicica}</p>} */}
-      {image_array.map((i,ind)=><img src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}
+      <div className='image-container'>{image_array.map((i,ind)=><img key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}</div>
 
       
     </div>

@@ -23,12 +23,9 @@ const Login=()=>{
       if(data.err){
         setError({msg:data.err})
       }else{
-        navigate({
-          pathname: "/class",
-          search: `?${createSearchParams({
-              email: values.email
-          })}`
-      });
+        navigate("/class",{state:values.email}
+          
+      );
       }
       
     });

@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import {Link,withRouter,useLocation,useNavigate} from 'react-router-dom';
+import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
 import Header from "../Home/Header";
 import 'react-datepicker/dist/react-datepicker.css'
 const Class=()=>{
   let navigate=useNavigate()
   let location=useLocation()
+  console.log(location)
   let list=[];
-  const [classname,setClassName]=useState({name:""});
+  const proba=[{
+    classId:1,
+    className:"2.a",
+    teacherEmail:"denis.pipalovic@fer.hr"
+  },
+  {
+    classId:2,
+    className:"4.a",
+    teacherEmail:"denis.pipalovic@fer.hr"
+  },
+]
+  const [classname,setClassName]=useState({name:""})
   const [classes,setClasses]=useState({list:[]});
   useEffect(()=>{
-    fetch('https://projekt-fer.herokuapp.com/web/teacherClass', {
+    fetch('https://projekt-fer.herokuapp.com/web/teacherClass?email='+location.state, {
       method: 'GET',
       headers:{
         'Content-Type':'application/json'
@@ -19,6 +31,16 @@ const Class=()=>{
       return (response.json());
     }).then(data=>{
       console.log(data)
+      try{
+       for(var i=0;i<proba.length;i++){
+         list[i]=proba[i]
+        
+       }
+       setClasses({list:list});
+      }
+       catch{
+         console.log(data)
+       }
     });
 
   },[]);
@@ -35,28 +57,18 @@ const Class=()=>{
       return (response.json())
     }).then(data=>{
       console.log(data)
-      try{
-        console.log(data)
-       for(var i=0;i<data.length;i++){
-        list[i]={
-
-        };
-        setClasses({list:list});
-       }}
-       catch{
-         console.log(data)
-       }
     });
   }
   const handleSubmit=(e)=>{
-    e.preventDefault();
-    navigate("/home",{state:{class:classname.name}})
+    navigate("/home",{state:e}
+  );
 
   }
   const handleChange=(e)=>{
     setClassName({
       ...classname,
       [e.target.name]:e.target.value,});
+      console.log(classname)
   };
   return (
   <div>
@@ -66,10 +78,11 @@ const Class=()=>{
     <hr/>
     <div className="classContainer">
     <div className="flex">
-    {classes.list.map((item,i) =><option key={i}>{item}</option>)}
-    <button className="submit" onClick={()=>handleSubmit()} >Odaberi</button></div>
+    <label className="label">Razredi</label>
+    {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="text" key={i}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
+    </div>
       <div className="flex">
-      <form className="form-wrapper">
+      <form>
       <label className="label">Ime razreda</label>
       <input 
       className="input" 
