@@ -5,7 +5,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 const Class=()=>{
   let navigate=useNavigate()
   let location=useLocation()
-  console.log(location)
   let list=[];
   const proba=[{
     classId:1,
@@ -32,8 +31,8 @@ const Class=()=>{
     }).then(data=>{
       console.log(data)
       try{
-       for(var i=0;i<proba.length;i++){
-         list[i]=proba[i]
+       for(var i=0;i<data.length;i++){
+         list[i]=data[i]
         
        }
        setClasses({list:list});
@@ -45,19 +44,20 @@ const Class=()=>{
 
   },[]);
   const addClass=(e)=>{
-    e.preventDefault();
+    console.log(location.state)
     fetch('https://projekt-fer.herokuapp.com/web/makeClass',{
       method: 'POST',
       headers:{
         'Content-Type':'application/json'
       },
       credentials: 'same-origin',
-      body:{className:classname.name} 
+      body:{className:classname.name,email:location.state} 
     }).then(function(response){
-      return (response.json())
+      return (response)
     }).then(data=>{
       console.log(data)
     });
+    e.preventDefault();
   }
   const handleSubmit=(e)=>{
     navigate("/home",{state:e}
@@ -79,7 +79,7 @@ const Class=()=>{
     <div className="classContainer">
     <div className="flex">
     <label className="label">Razredi</label>
-    {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="text" key={i}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
+    {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="list-container" key={i}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
     </div>
       <div className="flex">
       <form>
@@ -90,7 +90,7 @@ const Class=()=>{
       type="text" 
       value={classname.name}
       onChange={handleChange}/>
-      <button className="submit" onClick={()=>addClass()} >Dodaj</button>
+      <button className="submit" onClick={addClass} >Dodaj</button>
       </form>
       </div>
       </div>
