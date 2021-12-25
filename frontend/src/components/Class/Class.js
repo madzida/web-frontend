@@ -51,16 +51,17 @@ const Class=()=>{
         'Content-Type':'application/json'
       },
       credentials: 'same-origin',
-      body:{className:classname.name,email:location.state} 
+      body:JSON.stringify({className:classname.name,email:location.state})
     }).then(function(response){
-      return (response)
+      return (response.json())
     }).then(data=>{
       console.log(data)
+      navigate("/home",{state:{classId:data.classId}})
     });
     e.preventDefault();
   }
   const handleSubmit=(e)=>{
-    navigate("/home",{state:e}
+    navigate("/home",{state:{classId:e}}
   );
 
   }

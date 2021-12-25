@@ -1,16 +1,23 @@
 import React,{ useState,useEffect } from 'react';
+import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
 import valid from './valid';
 const AddStudent =()=>{
   const [randomImage, setRandomImage] = useState('');
-  var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/black_cat_black_and_white.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg']
+  // var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/black_cat_black_and_white.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg']
+  let location=useLocation()
+  let navigate=useNavigate()
+  console.log(location.state.classId.classId)
   const [values,setValues]=useState({
     ime:"",
     prezime:"",
     slicica:"",
-    idRazred:1,
+    idRazred:location.state.classId.classId,
   });
+
   const [errors,setErrors]=useState({});
+  const [index,setIndex]=useState({num:""});
   const handleFormSubmit=(e)=>{
+    
     fetch('https://projekt-fer.herokuapp.com/web/student/add', {
         method: 'POST',
         headers:{
@@ -25,7 +32,7 @@ const AddStudent =()=>{
         if(data.err){
           console.log(data.err)
         }else{
-          window.location.href="/home"
+          navigate("/home",{state:{classId:values.idRazred,index:index.num}})
         }
       })
       
@@ -39,8 +46,8 @@ const AddStudent =()=>{
       console.log(values)
   };
   const addImage=(i,index)=>{
-    image_array.splice(index,1)
-    console.log(index)
+    setIndex({...index,num:index})
+    
     var ret = i.replace('../images/','');
     setValues({
       ...values,
@@ -81,7 +88,7 @@ const AddStudent =()=>{
       value={values.slicica}
       onChange={handleChange}/>
       {errors.slicica && <p className="error">{errors.slicica}</p>} */}
-      <div className='image-container'>{image_array.map((i,ind)=><img key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}</div>
+      <div className='image-container'>{location.state.image_array.map((i,ind)=><img key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}</div>
 
       
     </div>

@@ -3,8 +3,10 @@ import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-
 import Header from "./Header";
 import 'react-datepicker/dist/react-datepicker.css'
 const Home=()=>{
+  var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/black_cat_black_and_white.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg']
   let location=useLocation();
   console.log(location)
+  let navigate=useNavigate()
   const [values,setValues]=useState({
     name:"",
     surname:"",
@@ -12,25 +14,6 @@ const Home=()=>{
     studentId:"",
   });
   let list=[];
-  const proba=[{
-    studentId:1,
-    name:"Mirta",
-    surname:"vucinic",
-    pictureKey:"bat.svg"
-  },
-  {
-    studentId:2,
-    name:"Jan",
-    surname:"Roland",
-    pictureKey:"bear.svg"
-  },
-  {
-    studentId:3,
-    name:"Davor",
-    surname:"vucinic",
-    pictureKey:"lion.svg"
-  }
-]
   const [students,setStudents]=useState({list:[]});
   const handleFormSubmit=(e)=>{
     e.preventDefault();
@@ -47,7 +30,10 @@ const Home=()=>{
 
   };
   useEffect(()=>{
-    fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state, {
+    if(location.state.index!==null){
+      image_array.splice(location.state.index,1)
+    }
+    fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state.classId, {
       method: 'GET',
       headers:{
         'Content-Type':'application/json'
@@ -57,10 +43,9 @@ const Home=()=>{
       return response.json();
     }).then(data=>{
       try{
-        console.log(proba)
-       for(var i=0;i<proba.length;i++){
-         console.log(proba[i].surname)
-         list[i]=proba[i]
+      console.log(data)
+       for(var i=0;i<data.length;i++){
+         list[i]=data[i]
         
        }
         setStudents({list:list});
@@ -104,7 +89,7 @@ const Home=()=>{
 
 
   const addingStudent=()=>{
-    window.location.href="/add";
+    navigate("/add",{state:{image_array:image_array,classId:location.state}});
   }
 
   return (
