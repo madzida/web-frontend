@@ -30,9 +30,6 @@ const Home=()=>{
 
   };
   useEffect(()=>{
-    if(location.state.index!==null){
-      image_array.splice(location.state.index,1)
-    }
     fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state.classId, {
       method: 'GET',
       headers:{

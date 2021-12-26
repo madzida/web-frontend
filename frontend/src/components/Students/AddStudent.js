@@ -16,34 +16,40 @@ const AddStudent =()=>{
 
   const [errors,setErrors]=useState({});
   const [index,setIndex]=useState({num:""});
+  const [error1,setError1]=useState({msg:""});
+  Object.keys(errors).length=1
+  const [dataIsCorrect,setDataIsCorrect]=useState(false);
   const handleFormSubmit=(e)=>{
-    
-    fetch('https://projekt-fer.herokuapp.com/web/student/add', {
-        method: 'POST',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        credentials: 'same-origin',
-        body: JSON.stringify(values)
-      }).then(function(response) {
-        console.log("the response is"+response)
-        return response.json();
-      }).then(data=>{
-        if(data.err){
-          console.log(data.err)
-        }else{
-          navigate("/home",{state:{classId:values.idRazred,index:index.num}})
-        }
-      })
-      
     e.preventDefault();
     setErrors(valid(values));
+    console.log(errors.ime!==undefined)
+    if(Object.keys(errors).length===0 && document.getElementById('name').value.length>0 && document.getElementById('surname').value.length>0 && values.slicica!==""){
+        fetch('https://projekt-fer.herokuapp.com/web/student/add', {
+            method: 'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(values)
+          }).then(function(response) {
+            console.log("the response is"+response)
+            return response.json();
+          }).then(data=>{
+            if(data.err){
+              setError1({msg:data.err})
+            }else{
+              navigate("/home",{state:{classId:values.idRazred}})
+            }
+          })
+      }
+      
   };
   const handleChange=(e)=>{
     setValues({
       ...values,
-      [e.target.name]:e.target.value,});
-      console.log(values)
+      [e.target.name]:e.target.value,},function(){
+        console.log(values)
+      });
   };
   const addImage=(i,index)=>{
     setIndex({...index,num:index})
@@ -61,7 +67,7 @@ const AddStudent =()=>{
   <form className="form-wrapper">
     <div className="name">
       <label className="label">Ime</label>
-      <input 
+      <input id="name"
       className="input" 
       name="ime" 
       type="text" 
@@ -71,7 +77,7 @@ const AddStudent =()=>{
     </div>
     <div className="email">
       <label className="label">Prezime</label>
-      <input 
+      <input id="surname"
       className="input" 
       type="text" 
       name="prezime" 
@@ -88,12 +94,13 @@ const AddStudent =()=>{
       value={values.slicica}
       onChange={handleChange}/>
       {errors.slicica && <p className="error">{errors.slicica}</p>} */}
-      <div className='image-container'>{location.state.image_array.map((i,ind)=><img key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}</div>
-
+      <div className='image-container'>{location.state.image_array.map((i,ind)=><img  key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}
+      </div>
+      {errors.slicica && <p className="error">{errors.slicica}</p>}
       
     </div>
     <div>
-      <button className="submit" onClick={handleFormSubmit}>Dodaj
+      <button type="button" className="submit" onClick={handleFormSubmit}>Dodaj
       </button>
     </div>
   </form>

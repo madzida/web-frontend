@@ -15,41 +15,32 @@ const SignupForm=({submitForm})=>{
   const handleFormSubmit=(e)=>{
     setError1({msg:""})
     setError2({msg:""})
-    fetch('https://projekt-fer.herokuapp.com/web/signup', {
-        method: 'POST',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        credentials: 'same-origin',
-        body: JSON.stringify(values)
-      }).then(function(response) {
-        console.log("the response is"+JSON.stringify(response))
-        return response.json();
-      }).then(data=>{
-        console.log(data)
-          if(data.err){
-            setError1({msg:data.err})
-          }else if(data.err3){
-            setError2({msg:data.err3})
-          }
-          else{
-            setDataIsCorrect(true);
-          }
-      });
-      
+    if((Object.keys(errors).length ===0)&& values.fullname.length>0 && values.email.length>0 && values.password.length>0){
+      fetch('https://projekt-fer.herokuapp.com/web/signup', {
+          method: 'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          credentials: 'same-origin',
+          body: JSON.stringify(values)
+        }).then(function(response) {
+          console.log("the response is"+JSON.stringify(response))
+          return response.json();
+        }).then(data=>{
+          console.log(data)
+            if(data.err){
+              setError1({msg:data.err})
+            }else if(data.err3){
+              setError2({msg:data.err3})
+            }
+            else{
+              navigate("/class",{state:values.email})
+            }
+        });
+      }
     e.preventDefault();
     setErrors(validation(values));
   };
-  useEffect(()=>{
-    if((Object.keys(errors).length ===0 && dataIsCorrect && !error1.msg && !error2.msg)){
-      navigate({
-        pathname: "/class",
-        search: `?${createSearchParams({
-            email: values.email
-        })}`
-    });
-    }
-  },[errors]);
   const handleChange=(e)=>{
     setValues({
       ...values,
