@@ -84,7 +84,7 @@ const SignupForm=({submitForm})=>{
         {error2.msg && <p className="error">{error2.msg}</p>}
       </div>
       <div>
-        <button className="submit" onClick={handleFormSubmit}>Registriraj se
+        <button type="submit" className="submit" onClick={handleFormSubmit}>Registriraj se
         </button>
       </div>
     </form>

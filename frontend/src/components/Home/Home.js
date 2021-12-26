@@ -15,20 +15,6 @@ const Home=()=>{
   });
   let list=[];
   const [students,setStudents]=useState({list:[]});
-  const handleFormSubmit=(e)=>{
-    e.preventDefault();
-    fetch('/home', {
-      method: 'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify({})
-    }).then(function(response) {
-      return (response.json());
-    });
-
-  };
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state.classId, {
       method: 'GET',
@@ -99,7 +85,6 @@ const Home=()=>{
     <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname}</p> <button className='link' onClick={()=>deleteStudent(item.studentId)}>Obriši</button><button className='link' onClick={()=>editStudent(item.studentId,i)}>Uredi</button></div>)}</div>
       <div className="button-container">
       <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
-      <button className="submit" onClick={handleFormSubmit}>Predaj</button>
       </div>
       </div>
   </div>

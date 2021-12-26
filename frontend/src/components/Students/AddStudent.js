@@ -100,7 +100,7 @@ const AddStudent =()=>{
       
     </div>
     <div>
-      <button type="button" className="submit" onClick={handleFormSubmit}>Dodaj
+      <button type="submit" className="submit" onClick={handleFormSubmit}>Dodaj
       </button>
     </div>
   </form>
