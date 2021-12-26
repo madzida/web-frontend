@@ -57,22 +57,13 @@ const Home=()=>{
       return response.json();
     })
   }
-  const editStudent=(studentId)=>{
-    fetch("'https://projekt-fer.herokuapp.com/web/student/edit",{
-      method: 'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify({values})
-    }).then(function(response) {
-      return response.json();
-    })
+  const editStudent=(studentId,name,surname,pictureKey)=>{
+    navigate("/add",{state:{image_array:image_array,classId:location.state.classId,name:name,surname:surname,studentId:studentId,edit:true,pictureKey:pictureKey}})
   }   
 
 
   const addingStudent=()=>{
-    navigate("/add",{state:{image_array:image_array,classId:location.state}});
+    navigate("/add",{state:{image_array:image_array,classId:location.state.classId,name:"",surname:"",studentId:"",edit:false,pictureKey:""}});
   }
 
   return (
@@ -82,7 +73,7 @@ const Home=()=>{
     <h1 className="title2">Dobrodošli</h1>
     <hr/>
     <div className="classContainer">
-    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname}</p> <button className='link' onClick={()=>deleteStudent(item.studentId)}>Obriši</button><button className='link' onClick={()=>editStudent(item.studentId,i)}>Uredi</button></div>)}</div>
+    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname}</p> <button className='link' onClick={()=>deleteStudent(item.studentId)}>Obriši</button><button className='link' onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}>Uredi</button></div>)}</div>
       <div className="button-container">
       <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
       </div>

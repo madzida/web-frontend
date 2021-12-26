@@ -6,14 +6,14 @@ const AddStudent =()=>{
   // var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/black_cat_black_and_white.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg']
   let location=useLocation()
   let navigate=useNavigate()
-  console.log(location.state.classId.classId)
+  console.log(location.state.classId)
   const [values,setValues]=useState({
-    ime:"",
-    prezime:"",
-    slicica:"",
-    idRazred:location.state.classId.classId,
+    ime:location.state.name,
+    prezime:location.state.surname,
+    slicica:location.state.pictureKey,
+    idRazred:location.state.classId,
   });
-
+  const[edit,setEdit]=useState(location.state.edit)
   const [errors,setErrors]=useState({});
   const [index,setIndex]=useState({num:""});
   const [error1,setError1]=useState({msg:""});
@@ -44,6 +44,25 @@ const AddStudent =()=>{
       }
       
   };
+  useEffect(()=>{
+    console.log(values)
+  },[values])
+  const editStudent=(e)=>{
+    e.preventDefault();
+    fetch('https://projekt-fer.herokuapp.com/web/student/edit',{
+      method: 'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin', 
+      body: JSON.stringify({name:values.ime,surname:values.prezime,pictureKey:values.slicica,studentId:location.state.studentId})
+    }).then(function(response){
+      return(response.json())
+    }).then(data=>{
+      console.log(data)
+      navigate("/home",{state:{classId:values.idRazred}})
+    })
+  }
   const handleChange=(e)=>{
     setValues({
       ...values,
@@ -100,8 +119,10 @@ const AddStudent =()=>{
       
     </div>
     <div>
-      <button type="submit" className="submit" onClick={handleFormSubmit}>Dodaj
-      </button>
+      {!edit &&<button type="submit" className="submit" onClick={handleFormSubmit}>Dodaj
+      </button>}
+      {edit &&<button type="submit" className="submit" onClick={editStudent}>Uredi
+      </button>}
     </div>
   </form>
 </div>
