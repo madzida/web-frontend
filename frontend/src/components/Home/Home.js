@@ -73,7 +73,7 @@ const Home=()=>{
     <h1 className="title2">Dobrodošli</h1>
     <hr/>
     <div className="classContainer">
-    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname}</p> <button className='link' onClick={()=>deleteStudent(item.studentId)}>Obriši</button><button className='link' onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}>Uredi</button></div>)}</div>
+    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname  } <img src={"../images/"+item.pictureKey} width="25" height="20"/></p> <button><img width="25" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="25" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
       <div className="button-container">
       <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
       </div>
