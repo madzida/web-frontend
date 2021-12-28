@@ -34,6 +34,7 @@ const SignupForm=({submitForm})=>{
               setError2({msg:data.err3})
             }
             else{
+              localStorage.setItem('token',data.token)
               navigate("/class",{state:values.email})
             }
         });
@@ -74,7 +75,7 @@ const SignupForm=({submitForm})=>{
       <div className="password">
         <label className="label">Lozinka</label>
         <input 
-        className="input" 
+        className="passwordinput" 
         type="password" 
         name="password" 
         value={values.password}

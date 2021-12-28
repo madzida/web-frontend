@@ -91,7 +91,8 @@ const AddStudent =()=>{
       name="ime" 
       type="text" 
       value={values.ime}
-      onChange={handleChange}/>
+      onChange={handleChange}
+      />
       {errors.ime && <p className="error">{errors.ime}</p>}
     </div>
     <div className="email">
@@ -101,7 +102,8 @@ const AddStudent =()=>{
       type="text" 
       name="prezime" 
       value={values.prezime}
-      onChange={handleChange}/>
+      onChange={handleChange}
+      />
       {errors.prezime && <p className="error">{errors.prezime}</p>}
     </div>
     <div className="password">

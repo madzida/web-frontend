@@ -13,6 +13,7 @@ const Header =()=>{
       return response.json();
     })
     window.location.href="/"
+    localStorage.clear()
   }
   return(
     <nav>

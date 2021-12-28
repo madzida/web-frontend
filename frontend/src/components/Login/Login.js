@@ -23,6 +23,7 @@ const Login=()=>{
       if(data.err){
         setError({msg:data.err})
       }else{
+        localStorage.setItem('token',data.token)
         navigate("/class",{state:values.email}
           
       );
@@ -53,7 +54,7 @@ const Login=()=>{
       <div className="password">
         <label className="label">Lozinka</label>
         <input 
-        className="input" 
+        className="passwordinput" 
         type="password" 
         name="password" 
         value={values.password}
