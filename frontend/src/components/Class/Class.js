@@ -86,7 +86,7 @@ const Class=()=>{
       <form>
       <label className="label">Ime razreda</label>
       <input 
-      className="input" 
+      className="passwordinput" 
       name="name" 
       type="text" 
       value={classname.name}

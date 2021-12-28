@@ -45,7 +45,7 @@ const Login=()=>{
       <div className="email">
         <label className="label">E-mail</label>
         <input 
-        className="input" 
+        className="passwordinput" 
         type="email" 
         name="email" 
         value={values.email}
