@@ -43,13 +43,13 @@ const Home=()=>{
       ...values,
       [e.target.name]:e.target.value,});
   };
-  
+  const token = localStorage.getItem('token')
   const deleteStudent=(studentId)=>{
-    const token = localStorage.getItem('token')
     fetch("https://projekt-fer.herokuapp.com/web/student/remove",{
       method: 'POST',
       headers:{
         'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       withCredentials: true,
       body: JSON.stringify({studentId:studentId})
