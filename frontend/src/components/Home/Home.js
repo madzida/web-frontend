@@ -105,7 +105,7 @@ const Home=()=>{
     <h1 className="title2">Dobrodošli</h1>
     <hr/>
     <div className="classContainer">
-    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="25" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="25" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
+    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="40" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="40" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
       <div className="button-container">
       <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
       </div>
