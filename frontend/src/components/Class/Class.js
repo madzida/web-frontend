@@ -79,7 +79,7 @@ const Class=()=>{
     <hr/>
     <div className="classContainer">
     <div className="flex">
-    <label className="label">Razredi</label>
+    <h3>Razredi</h3>
     {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="list-container" key={i}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
     </div>
       <div className="flex">
