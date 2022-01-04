@@ -3,10 +3,9 @@ import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-
 import valid from './valid';
 const AddStudent =()=>{
   const [randomImage, setRandomImage] = useState('');
-  // var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/black_cat_black_and_white.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg']
   let location=useLocation()
   let navigate=useNavigate()
-  console.log(location.state.classId)
+  console.log(location.state)
   const [values,setValues]=useState({
     ime:location.state.name,
     prezime:location.state.surname,
@@ -18,6 +17,7 @@ const AddStudent =()=>{
   const [index,setIndex]=useState({num:""});
   const [error1,setError1]=useState({msg:""});
   Object.keys(errors).length=1
+  const emoji = require("emoji-dictionary");
   const [dataIsCorrect,setDataIsCorrect]=useState(false);
   const handleFormSubmit=(e)=>{
     e.preventDefault();
@@ -64,19 +64,18 @@ const AddStudent =()=>{
     })
   }
   const handleChange=(e)=>{
+    let upper=(e.target.value).charAt(0).toUpperCase() + (e.target.value).slice(1);
     setValues({
       ...values,
-      [e.target.name]:e.target.value,},function(){
+      [e.target.name]:upper,},function(){
         console.log(values)
       });
   };
   const addImage=(i,index)=>{
     setIndex({...index,num:index})
-    
-    var ret = i.replace('../images/','');
     setValues({
       ...values,
-      slicica:ret});
+      slicica:i});
       console.log(values)
   }
   return (<div className="container"><div className="app-wrapper">
@@ -115,10 +114,11 @@ const AddStudent =()=>{
       value={values.slicica}
       onChange={handleChange}/>
       {errors.slicica && <p className="error">{errors.slicica}</p>} */}
-      <div className='image-container'>{location.state.image_array.map((i,ind)=><img  key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)}
+      <div className='image-container'>
+        {/* {location.state.image_array.map((i,ind)=><img  key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)} */}
+        {location.state.emoji_array.map((i,ind)=><span key={ind} className='emoji' onClick={()=>addImage(i,ind)}>{emoji.getUnicode(i)}</span>)}
       </div>
       {errors.slicica && <p className="error">{errors.slicica}</p>}
-      
     </div>
     <div>
       {!edit &&<button type="submit" className="submit" onClick={handleFormSubmit}>Dodaj

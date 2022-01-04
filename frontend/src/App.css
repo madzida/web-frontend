@@ -191,7 +191,7 @@ nav{
 }
 .image-container{
   width:400px;
-  margin-left:40px;
+  margin-left:50px; 
 }
 .list-container{
   width:200px;
@@ -206,4 +206,8 @@ nav{
 }
 .margin-top{
   margin-top:20px;
+}
+.emoji{
+  font-size: 50px;
+  cursor:pointer;
 }
