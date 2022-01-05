@@ -6,24 +6,16 @@ const Class=()=>{
   let navigate=useNavigate()
   let location=useLocation()
   let list=[];
-  const proba=[{
-    classId:1,
-    className:"2.a",
-    teacherEmail:"denis.pipalovic@fer.hr"
-  },
-  {
-    classId:2,
-    className:"4.a",
-    teacherEmail:"denis.pipalovic@fer.hr"
-  },
-]
+
   const [classname,setClassName]=useState({name:""})
+  const token = localStorage.getItem('token')
   const [classes,setClasses]=useState({list:[]});
   useEffect(()=>{
-    fetch('https://projekt-fer.herokuapp.com/web/teacherClass?email='+location.state, {
+    fetch('https://projekt-fer.herokuapp.com/web/teacherClass', {
       method: 'GET',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
        withCredentials: true 
     }).then(function(response) {
