@@ -166,7 +166,7 @@ const Home=()=>{
     <div>    
       <nav>
       <div className="header">
-        <div className="title2" onClick={()=>{window.location.href="/class"}}>Dobrodošli</div>
+        <div className="title2" ><img width="40" height="40" src={"../images/space-invaders.png"}/><p onClick={()=>{window.location.href="/class"}}>Dobrodošli</p></div>
         <button className="link" onClick={addingStudent}>Dodaj Učenika</button>
         {test.msg && <button className="link" onClick={stopTest}>Zaustavi test</button>}
         {!test.msg && <button className="link" onClick={startTest}>Pokreni test</button>}

@@ -15,7 +15,7 @@ const Test =()=>{
       <span>Id razreda</span>
       <span>Datum stvaranja testa</span>
       <span>Status testa</span>
-      <span>Pregled rezultata testa</span>
+      <span>Pregled rezultata učenika</span>
     </h5>
     <hr />
     {location.state.map((test,i)=>{

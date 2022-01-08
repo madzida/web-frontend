@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
 import ClassHeader from "../Home/ClassHeader";
+import ReactHover,{ Trigger, Hover }  from 'react-hover';
 import 'react-datepicker/dist/react-datepicker.css'
 const Class=()=>{
   let navigate=useNavigate()
@@ -10,6 +11,7 @@ const Class=()=>{
   const [classname,setClassName]=useState({name:""})
   const token = localStorage.getItem('token')
   const [classes,setClasses]=useState({list:[]});
+
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/teacherClass', {
       method: 'GET',
@@ -48,7 +50,8 @@ const Class=()=>{
       return (response.json())
     }).then(data=>{
       console.log(data)
-      navigate("/home",{state:{classId:data.classId}})
+      window.location.href="/class"
+      // navigate("/home",{state:{classId:data.classId}})
     });
     e.preventDefault();
   }
@@ -78,6 +81,11 @@ const Class=()=>{
       [e.target.name]:e.target.value,});
       console.log(classname)
   };
+  const optionsCursorTrueWithMargin = {
+    followCursor:true,
+    shiftX:20,
+    shiftY:0
+}
   return (
   <div>
     <div>
@@ -85,7 +93,14 @@ const Class=()=>{
     <div className="classContainer">
     <div className="flex">
     <h3>Razredi</h3>
-    {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="list-container" key={i} onClick={()=>getTests(item.classId)}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
+    {classes.list.map((item,i) =>{return<div className='flex-row' key={i}><ReactHover options={optionsCursorTrueWithMargin}> 
+    <Trigger type="trigger"><p className="list-container cursor" onClick={()=>getTests(item.classId)}>{item.className}</p>
+        </Trigger>
+        <Hover type="hover">
+      <p className="hover-text">Pregled rezultata testova </p>
+      </Hover>
+        </ReactHover>
+        <button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
     </div>
       <div className="flex">
       <form>

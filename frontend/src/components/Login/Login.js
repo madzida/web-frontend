@@ -64,7 +64,7 @@ const Login=()=>{
       <div>
         <button className="submit" onClick={handleFormSubmit}>Prijavi se</button>
       </div>
-      <div className="register-text">Ako nemate korisnički račun odite na registraciju</div>
+      <div className="register-text">Stvaranje korisničkog računa</div>
       <div>
       <Link to={"/signup"}>
         <button className="register">Registriraj se</button>

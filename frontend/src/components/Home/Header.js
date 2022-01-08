@@ -18,7 +18,7 @@ const Header =()=>{
   return(
     <nav>
       <div className="header">
-        <div className="titleTest" onClick={()=>{window.location.href="/class"}}>Testovi</div>
+        <div className="titleTest"><img width="40" height="40" src={"../images/space-invaders.png"}/><p onClick={()=>{window.location.href="/class"}}>Testovi</p></div>
         <button className="link" onClick={logout}>Odjavi se</button>
 
       </div>

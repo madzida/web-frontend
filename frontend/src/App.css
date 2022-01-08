@@ -3,7 +3,7 @@
   padding:0;
 }
 .container{
-  background: linear-gradient(45deg,#823ba3,#e374e7,#6e115f,#3e32a7);
+  background: linear-gradient(45deg,#823ba3,#d88a40,#6e115f,#3e32a7,#0f7e1e);
   width:100%;
   min-height: 100vh;
   display: flex;
@@ -31,6 +31,9 @@
   font-weight: bold;
   margin-right: 380px;
   margin-left:720px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .titleClass{
   color:#6e115f;
@@ -40,6 +43,9 @@
   font-weight: bold;
   margin-right: 600px;
   margin-left:720px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .titleTest{
   color:#6e115f;
@@ -50,6 +56,9 @@
   margin-right: 620px;
   margin-left:760px;
   cursor:pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .name,.email,.password{
   margin: 20px;
@@ -232,10 +241,9 @@ button:active{
   margin-left:50px; 
 }
 .list-container{
-  min-width:250px;
+  min-width:350px;
   height:40px;
   font-size: 25px;
-  cursor:pointer;
 }
 .button-container{
   display: flex;
@@ -269,4 +277,12 @@ button:active{
   margin:8px;
   color:#6e115f;
   font-weight: bold;
+}
+.hover-text{
+  color:green ;
+  font-size: 20px;
+  font-weight: normal;
+}
+.cursor{
+  cursor:url(../src/components/images/cursor-invaders.png),auto;
 }
