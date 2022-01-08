@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
-import Header from "../Home/Header";
+import ClassHeader from "../Home/ClassHeader";
 import 'react-datepicker/dist/react-datepicker.css'
 const Class=()=>{
   let navigate=useNavigate()
@@ -52,6 +52,21 @@ const Class=()=>{
     });
     e.preventDefault();
   }
+  const getTests=(classId)=>{
+    fetch('https://projekt-fer.herokuapp.com/web/test/getTestsForClass?classId='+classId,{
+      method: 'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin',
+    }).then(function(response){
+      return (response.json())
+    }).then(data=>{
+      console.log(data)
+      navigate("/test",{state:data})
+      
+    });
+  }
   const handleSubmit=(e)=>{
     navigate("/home",{state:{classId:e}}
   );
@@ -66,13 +81,11 @@ const Class=()=>{
   return (
   <div>
     <div>
-    <div><Header/></div>
-    <h1 className="title2">Dobrodošli</h1>
-    <hr/>
+    <div><ClassHeader/></div>
     <div className="classContainer">
     <div className="flex">
     <h3>Razredi</h3>
-    {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="list-container" key={i}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
+    {classes.list.map((item,i) =>{return<div className='flex-row'> <p className="list-container" key={i} onClick={()=>getTests(item.classId)}>{item.className}</p><button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
     </div>
       <div className="flex">
       <form>

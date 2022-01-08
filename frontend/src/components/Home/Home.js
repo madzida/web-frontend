@@ -42,6 +42,7 @@ const Home=()=>{
     studentId:"",
   });
   let list=[];
+  const [test,setTest]=useState({status:false})
   const [students,setStudents]=useState({list:[]});
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state.classId, {
@@ -64,6 +65,19 @@ const Home=()=>{
        catch{
          console.log(data)
        }
+    });
+  },[])
+  useEffect(()=>{
+    fetch('https://projekt-fer.herokuapp.com/web/test/checkOngoing?classId='+location.state.classId, {
+      method: 'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin',
+    }).then(function(response) {
+      return response.json();
+    }).then(data=>{
+      	setTest({msg:data.status})
     });
   },[])
   const handleChange=(e)=>{
@@ -97,17 +111,72 @@ const Home=()=>{
   const addingStudent=()=>{
     navigate("/add",{state:{emoji_array:emoji_array,classId:location.state.classId,name:"",surname:"",studentId:"",edit:false,pictureKey:""}});
   }
-
+  const logout =()=>{
+    fetch('https://projekt-fer.herokuapp.com/logout', {
+      method: 'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin'
+    }).then(function(response) {
+      console.log("the response is"+JSON.stringify(response))
+      return response.json();
+    })
+    window.location.href="/"
+    localStorage.clear()
+  }
+  const stopTest =()=>{
+    fetch('https://projekt-fer.herokuapp.com/web//test/stopTest?classId='+location.state.classId, {
+      method: 'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin'
+    }).then(function(response) {
+      console.log("the response is"+JSON.stringify(response))
+      return response.json();
+    }).then(data=>{
+      if(!data.err)
+       setTest({msg:false})
+      else
+        setTest({msg:true})
+    })  
+  }
+  const startTest =()=>{
+    fetch('https://projekt-fer.herokuapp.com/web//test/makeTest?classId='+location.state.classId, {
+      method: 'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials: 'same-origin'
+    }).then(function(response) {
+      console.log("the response is"+JSON.stringify(response))
+      return response.json();
+    }).then(data=>{
+      if(!data.err)
+        setTest({msg:true})
+      else
+      setTest({msg:false})
+    })  
+  }
+  console.log(test)
   return (
   <div>
     <div>
-    <div><Header/></div>
-    <h1 className="title2">Dobrodošli</h1>
-    <hr/>
-    <div className="classContainer">
+    <div>    
+      <nav>
+      <div className="header">
+        <div className="title2" onClick={()=>{window.location.href="/class"}}>Dobrodošli</div>
+        <button className="link" onClick={addingStudent}>Dodaj Učenika</button>
+        {test.msg && <button className="link" onClick={stopTest}>Zaustavi test</button>}
+        {!test.msg && <button className="link" onClick={startTest}>Pokreni test</button>}
+        <button className="link" onClick={logout}>Odjavi se</button>
+      </div>
+    </nav>
+    </div>
+    <div className="studentContainer">
     <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="40" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="40" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
       <div className="button-container">
-      <button className="submit" onClick={addingStudent}>Dodaj Učenika</button>
       </div>
       </div>
   </div>

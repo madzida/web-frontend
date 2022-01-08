@@ -26,7 +26,30 @@
 .title2{
   color:#6e115f;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-right: 380px;
+  margin-left:720px;
+}
+.titleClass{
+  color:#6e115f;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-right: 600px;
+  margin-left:720px;
+}
+.titleTest{
+  color:#6e115f;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-right: 620px;
+  margin-left:760px;
+  cursor:pointer;
 }
 .name,.email,.password{
   margin: 20px;
@@ -113,18 +136,27 @@ button:active{
   min-width:370px;
   color: #2f614a;
 }
-nav{
-  height:50px;
-  text-align: right;
-}
+
 .header{
   display: flex;
   flex-direction: row;
-  justify-content: right;
+  justify-content: center;
+  background-color: rgb(107, 189, 114);;
+  padding:15px;
+  gap:10px;
+  border-bottom:1px solid rgba(70, 67, 67, 0.856);
+  
 }
 .link{
   color:#823ba3;
   padding:5px;
+  width:130px;
+  height:37px;
+  border-radius: 5px;
+  font-weight: bold;
+  outline:none;
+  border:none;
+  cursor:pointer;
 }
 .btn{
   background-color: #6e115f;
@@ -166,9 +198,15 @@ nav{
 .classContainer{
   display: flex;
   flex-direction: row; 
-  gap:35%;
+  justify-content: center;
+  gap:30%;
+}
+.studentContainer{
+  display: flex;
+  flex-direction: row; 
   justify-content: center;
 }
+
 .input2{
   
   width:450px;
@@ -194,9 +232,10 @@ nav{
   margin-left:50px; 
 }
 .list-container{
-  width:300px;
+  min-width:250px;
   height:40px;
   font-size: 25px;
+  cursor:pointer;
 }
 .button-container{
   display: flex;
@@ -210,4 +249,24 @@ nav{
 .emoji{
   font-size: 50px;
   cursor:pointer;
+}
+.test-list{
+  font-size: 20px;
+  display:grid;
+  grid-template-rows: auto;
+  text-align: center;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin:8px;
+  color:#6e115f;
+  font-weight: bold;
+}
+.result-list{
+  font-size: 20px;
+  display:grid;
+  grid-template-rows: auto;
+  text-align: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin:8px;
+  color:#6e115f;
+  font-weight: bold;
 }

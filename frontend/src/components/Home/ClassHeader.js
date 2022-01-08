@@ -18,7 +18,7 @@ const Header =()=>{
   return(
     <nav>
       <div className="header">
-        <div className="titleTest" onClick={()=>{window.location.href="/class"}}>Testovi</div>
+        <div className="titleClass">Dobrodošli</div>
         <button className="link" onClick={logout}>Odjavi se</button>
 
       </div>
