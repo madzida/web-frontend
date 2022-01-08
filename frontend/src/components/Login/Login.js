@@ -7,8 +7,18 @@ const Login=()=>{
     email:"",
     password:""
   });
-  let string=""
+  const [errorEmail, setErrorEmail] = React.useState({msg:''});
+  const [errorPassword, setErrorPassword] = React.useState({msg:''});
   const handleFormSubmit=(e)=>{
+    setError("")
+    setErrorEmail("")
+    setErrorPassword("")
+    if(values.password.length===0){
+      setErrorPassword({msg:'Potrebno je unijeti lozinku'})
+    }
+    if(values.email.length===0){
+      setErrorEmail({msg:'Potrebno je unijeti email'})
+    }
     fetch('https://projekt-fer.herokuapp.com/web/login', {
       method: 'POST',
       headers:{
@@ -50,6 +60,7 @@ const Login=()=>{
         name="email" 
         value={values.email}
         onChange={handleChange}/>
+        {errorEmail.msg && <p className='error'>{errorEmail.msg}</p>}
       </div>
       <div className="password">
         <label className="label">Lozinka</label>
@@ -59,6 +70,7 @@ const Login=()=>{
         name="password" 
         value={values.password}
         onChange={handleChange}/>
+        {errorPassword.msg && <p className='error'>{errorPassword.msg}</p>}
         {error.msg && <p className='error'>{error.msg}</p>}
       </div>
       <div>

@@ -51,7 +51,7 @@ const TestResult =()=>{
             <p onClick={()=>studentResult(item.studentId)} className="cursor">{item.name} {item.surname}</p>
           </Trigger> 
           <Hover type="hover">
-        	  <p className="hover-text">Rezultati učenika</p>
+        	  <p className="hover-text">Kliknite za rezultate učenika</p>
           </Hover>
       </ReactHover>
       <span>{item.results}</span>

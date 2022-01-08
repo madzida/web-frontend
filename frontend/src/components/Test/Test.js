@@ -23,7 +23,7 @@ const Test =()=>{
     <div className="test-list" key={i}>
       <span>Test #{test.testId}</span>
       <span>{test.classId}</span>
-      <span>{moment(test.dateOf).format('DD.MM.YYYY HH:mm:ss')}</span>
+      <span>{moment(test.dateOf).format('DD.MM.YYYY')}</span>
       <span>{test.status}</span>
       <span><button className='link' onClick={()=>testResults(test.testId)}>Pregledaj</button></span>
     </div>)

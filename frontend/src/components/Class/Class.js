@@ -11,7 +11,7 @@ const Class=()=>{
   const [classname,setClassName]=useState({name:""})
   const token = localStorage.getItem('token')
   const [classes,setClasses]=useState({list:[]});
-
+  const [error, setError] = React.useState({msg:''});
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/teacherClass', {
       method: 'GET',
@@ -92,25 +92,26 @@ const Class=()=>{
     <div><ClassHeader/></div>
     <div className="classContainer">
     <div className="flex">
-    <h3>Razredi</h3>
+    <label className="label">Razredi</label>
     {classes.list.map((item,i) =>{return<div className='flex-row' key={i}><ReactHover options={optionsCursorTrueWithMargin}> 
     <Trigger type="trigger"><p className="list-container cursor" onClick={()=>getTests(item.classId)}>{item.className}</p>
         </Trigger>
         <Hover type="hover">
-      <p className="hover-text">Pregled rezultata testova </p>
+      <p className="hover-text">Kliknite za pregled rezultata testova </p>
       </Hover>
         </ReactHover>
         <button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
     </div>
       <div className="flex">
       <form>
-      <label className="label">Ime razreda</label>
+      <label className="label">Dodaj razred</label>
       <input 
       className="passwordinput" 
       name="name" 
       type="text" 
       value={classname.name}
       onChange={handleChange}/>
+      {error.msg && <p className='error'>{error.msg}</p>}
       <button className="submit" onClick={addClass} >Dodaj</button>
       </form>
       </div>
