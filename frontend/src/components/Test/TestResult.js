@@ -37,7 +37,7 @@ const TestResult =()=>{
   }
   return(<div>
     <div><Header/></div>
-    <div className="result-list">
+    <div className="result-list container-list">
       <span>Ime i prezime</span>
       <span>Broj uništenih neprijatelja</span>
       <span>Trajanje igre</span>
@@ -45,7 +45,7 @@ const TestResult =()=>{
     <hr/>
     {results.list.map((item,i)=>{
       return(
-      <div className="result-list" key={i}>
+      <div className="result-list container-list" key={i}>
       <ReactHover options={optionsCursorTrueWithMargin}>
         	<Trigger type="trigger">
             <p onClick={()=>studentResult(item.studentId)} className="cursor">{item.name} {item.surname}</p>
@@ -55,7 +55,7 @@ const TestResult =()=>{
           </Hover>
       </ReactHover>
       <span>{item.results}</span>
-      <span>{item.timeOf}</span>
+      <span>{Math.floor(item.timeOf / 60000)} : {((item.timeOf % 60000) / 1000).toFixed(0)} s</span>
     </div>
       )
     })}

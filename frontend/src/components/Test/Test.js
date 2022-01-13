@@ -10,7 +10,7 @@ const Test =()=>{
   }
   return(<div>
     <div><Header/></div>
-    <h5 className="test-list">
+    <h5 className="test-list container-list">
       <span>Id testa</span>
       <span>Id razreda</span>
       <span>Datum stvaranja testa</span>
@@ -20,7 +20,7 @@ const Test =()=>{
     <hr />
     {location.state.map((test,i)=>{
     return(
-    <div className="test-list" key={i}>
+    <div className="test-list container-list" key={i}>
       <span>Test #{test.testId}</span>
       <span>{test.classId}</span>
       <span>{moment(test.dateOf).format('DD.MM.YYYY')}</span>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
 import Header from "./Header";
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
+import useInterval from 'use-interval';
 const Home=()=>{
-  var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/cat.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg']
+/*   var image_array=['../images/bat.svg','../images/bear.svg','../images/bird.svg','../images/cat.svg','../images/butterfly.svg','../images/chick.svg','../images/crocodile.svg','../images/dog.svg','../images/dolphin.svg','../images/fish.svg','../images/flamingo.svg','../images/fox.svg','../images/ladybug.svg','../images/lion.svg','../images/monkey.svg','../images/mouse.svg','../images/octopus.svg','../images/panda.svg','../images/penguin.svg','../images/rhino.svg','../images/snail.svg','../images/snake.svg','../images/tiger.svg','../images/turtle.svg','../images/wolf.svg'] */
   var emoji_array=[
     'elephant',
     'dog',
@@ -33,7 +34,6 @@ const Home=()=>{
   ];
   const emoji = require("emoji-dictionary");
   let location=useLocation();
-  console.log(location)
   let navigate=useNavigate()
   const [values,setValues]=useState({
     name:"",
@@ -42,8 +42,9 @@ const Home=()=>{
     studentId:"",
   });
   let list=[];
-  const [test,setTest]=useState({status:false})
+  const [test,setTest]=useState({msg:false})
   const [students,setStudents]=useState({list:[]});
+  const [results,setResults]=useState({list:[]});
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state.classId, {
       method: 'GET',
@@ -159,23 +160,27 @@ const Home=()=>{
       setTest({msg:false})
     })  
   }
-  console.log(test)
+  const topResults =()=>{
+    navigate("/topResults",{state:{classId:location.state.classId}})
+    
+  }
   return (
   <div>
     <div>
     <div>    
       <nav>
       <div className="header">
-        <div className="title2" ><img width="40" height="40" src={"../images/space-invaders.png"}/><p className='pointer'onClick={()=>{window.location.href="/class"}}>Dobrodošli</p></div>
+        <div className="title2 title-all title-design" ><img width="40" height="40" src={"../images/space-invaders.png"}/><p className='pointer'onClick={()=>{window.location.href="/class"}}>Dobrodošli</p></div>
         <button className="link" onClick={addingStudent}>Dodaj Učenika</button>
-        {test.msg && <button className="link" onClick={stopTest}>Zaustavi test</button>}
-        {!test.msg && <button className="link" onClick={startTest}>Pokreni test</button>}
+        {test.msg && <button className="link" onClick={topResults}>Top rezultati</button>}
+        {test.msg && <button className="link" id="stop" onClick={stopTest}>Zaustavi test</button>}
+        {!test.msg && <button className="link" id="start" onClick={startTest}>Pokreni test</button>}
         <button className="link" onClick={logout}>Odjavi se</button>
       </div>
     </nav>
     </div>
     <div className="studentContainer">
-    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} className='flex-row'><p className="list-container"key={i}>{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="40" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="40" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
+    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} key={i} className='flex-row'><p className="list-container" >{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="40" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="40" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
       <div className="button-container">
       </div>
       </div>

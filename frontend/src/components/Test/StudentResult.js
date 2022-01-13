@@ -29,18 +29,20 @@ const StudentResult =()=>{
 
   return(<div>
     <div><Header/></div>
-    <div className="result-list">
-      <span>Trajanje igre</span>
+    <div className="result-list container-list">
+      <span>Proteklo vrijeme</span>
       <span>Računske operacije</span>
-      <span>Broj ubijenih neprijatelja</span>
+      <span>Čudovište uništeno?</span>
     </div>
     <hr/>
     {results.list.map((item,i)=>{
       return(
-      <div className="result-list" key={i}>
+      <div className="result-list container-list" key={i}>
       <span>{item.timeTaken}</span>
       <span>{item.calculation}</span>
-      <span>{item.enemyKilledStatus}</span>
+      {item.enemyKilledStatus=="false" && <span>Nije ubijeno</span>}
+      {item.enemyKilledStatus=="true" && <span>Ubijeno</span>}
+      
     </div>
       )
     })}

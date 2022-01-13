@@ -49,7 +49,7 @@ const SignupForm=({submitForm})=>{
   };
   return (<div className="container"><div className="app-wrapper">
     <div>
-      <h2 className="title">Registracija</h2>
+      <h2 className="title title-all">Registracija</h2>
     </div>
     <form className="form-wrapper">
       <div className="name">

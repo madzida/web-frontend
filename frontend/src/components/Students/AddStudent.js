@@ -80,7 +80,8 @@ const AddStudent =()=>{
   }
   return (<div className="container"><div className="app-wrapper">
   <div >
-    <h2 className="title">Dodavanje učenika</h2>
+    {!edit &&<h2 className="title title-all">Dodavanje učenika</h2>}
+    {edit &&<h2 className="title title-all">Uređivanje učenika</h2>}
   </div>
   <form className="form-wrapper">
     <div className="name">

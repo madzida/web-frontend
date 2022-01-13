@@ -9,7 +9,8 @@ import AddStudent from './components/Students/AddStudent';
 import Class from './components/Class/Class';
 import Test from './components/Test/Test';
 import TestResult from './components/Test/TestResult';
-import StudentResult from './components/Test/StudentResult'
+import StudentResult from './components/Test/StudentResult';
+import TopResults from './components/Test/TopResults';
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
           <Route exact path='/test' element={<Test/>}></Route>
           <Route exact path='/testResults' element={<TestResult/>}></Route>
           <Route exact path='/studentResult' element={<StudentResult/>}></Route>
+          <Route exact path='/topResults' element={<TopResults/>}></Route>
        </Routes>
     </Router>
    

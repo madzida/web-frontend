@@ -18,7 +18,7 @@ const Header =()=>{
   return(
     <nav>
       <div className="header">
-        <div className="titleClass"><img width="40" height="40" src={"../images/space-invaders.png"}/><p>Dobrodošli</p></div>
+        <div className="titleClass title-all title-design"><img width="40" height="40" src={"../images/space-invaders.png"}/><p>Dobrodošli</p></div>
         <button className="link" onClick={logout}>Odjavi se</button>
 
       </div>

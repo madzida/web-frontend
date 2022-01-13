@@ -49,7 +49,7 @@ const Login=()=>{
   };
   return (<div className="container"><div className="app-wrapper">
     <div>
-      <h2 className="title">Prijava</h2>
+      <h2 className="title title-all">Prijava</h2>
     </div>
     <form>
       <div className="email">
