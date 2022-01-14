@@ -19,7 +19,7 @@ const Header =()=>{
     <nav>
       <div className="header">
         <div className="titleClass title-all title-design"><img width="40" height="40" src={"../images/space-invaders.png"}/><p>Dobrodošli</p></div>
-        <button className="link" onClick={logout}>Odjavi se</button>
+        <button className="link pointer" onClick={logout}>Odjavi se</button>
 
       </div>
     </nav>

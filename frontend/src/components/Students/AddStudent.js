@@ -87,7 +87,7 @@ const AddStudent =()=>{
     <div className="name">
       <label className="label">Ime</label>
       <input id="name"
-      className="input" 
+      className="input capitalize" 
       name="ime" 
       type="text" 
       value={values.ime}
@@ -98,7 +98,7 @@ const AddStudent =()=>{
     <div className="email">
       <label className="label">Prezime</label>
       <input id="surname"
-      className="input" 
+      className="input capitalize" 
       type="text" 
       name="prezime" 
       value={values.prezime}
@@ -122,9 +122,9 @@ const AddStudent =()=>{
       {errors.slicica && <p className="error">{errors.slicica}</p>}
     </div>
     <div>
-      {!edit &&<button type="submit" className="submit" onClick={handleFormSubmit}>Dodaj
+      {!edit &&<button type="submit" className="submit pointer" onClick={handleFormSubmit}>Dodaj
       </button>}
-      {edit &&<button type="submit" className="submit" onClick={editStudent}>Uredi
+      {edit &&<button type="submit" className="submit pointer" onClick={editStudent}>Uredi
       </button>}
     </div>
   </form>

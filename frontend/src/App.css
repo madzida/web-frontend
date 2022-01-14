@@ -86,15 +86,9 @@
   width:100%;
   border-style: none none 2px solid black none;
   margin-bottom: 10px;
-  text-transform:capitalize;
 }
-.passwordinput{
-  height:32px;
-  font-size: 20px;
-  outline: none;
-  width:100%;
-  border-style: none none 2px solid black none;
-  margin-bottom: 10px;
+.capitalize{
+  text-transform:capitalize;
 }
 .register-text{
   text-align: center;
@@ -120,7 +114,6 @@
   margin:auto;
   outline:none;
   border:none;
-  cursor:pointer;
   transition:all 0.1s
 }
 button:active{
@@ -154,7 +147,6 @@ button:active{
   font-weight: bold;
   outline:none;
   border:none;
-  cursor:pointer;
 }
 .btn{
   background-color: #6e115f;
@@ -167,7 +159,6 @@ button:active{
   margin:auto;
   outline:none;
   border:none;
-  cursor:pointer;
 }
 .btn2{
   background-color: #6e115f;
@@ -179,7 +170,6 @@ button:active{
   margin:auto;
   outline:none;
   border:none;
-  cursor:pointer;
 }
 .input-student{
   outline: none;
@@ -244,7 +234,6 @@ button:active{
 }
 .emoji{
   font-size: 50px;
-  cursor:pointer;
 }
 .container-list{
   font-size: 20px;

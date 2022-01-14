@@ -100,19 +100,19 @@ const Class=()=>{
       <p className="hover-text">Kliknite za pregled rezultata testova </p>
       </Hover>
         </ReactHover>
-        <button className="link" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
+        <button className="link pointer" onClick={()=>handleSubmit(item.classId)} >Odaberi</button></div>})}
     </div>
       <div className="flex">
       <form>
       <label className="label">Dodaj razred</label>
       <input 
-      className="passwordinput" 
+      className="input" 
       name="name" 
       type="text" 
       value={classname.name}
       onChange={handleChange}/>
       {error.msg && <p className='error'>{error.msg}</p>}
-      <button className="submit" onClick={addClass} >Dodaj</button>
+      <button className="submit pointer" onClick={addClass} >Dodaj</button>
       </form>
       </div>
       </div>

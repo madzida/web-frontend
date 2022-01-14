@@ -55,7 +55,7 @@ const Login=()=>{
       <div className="email">
         <label className="label">E-mail</label>
         <input 
-        className="passwordinput" 
+        className="input" 
         type="email" 
         name="email" 
         value={values.email}
@@ -65,7 +65,7 @@ const Login=()=>{
       <div className="password">
         <label className="label">Lozinka</label>
         <input 
-        className="passwordinput" 
+        className="input" 
         type="password" 
         name="password" 
         value={values.password}
@@ -74,12 +74,12 @@ const Login=()=>{
         {error.msg && <p className='error'>{error.msg}</p>}
       </div>
       <div>
-        <button className="submit" onClick={handleFormSubmit}>Prijavi se</button>
+        <button className="submit pointer" onClick={handleFormSubmit}>Prijavi se</button>
       </div>
       <div className="register-text">Stvaranje korisničkog računa</div>
       <div>
       <Link to={"/signup"}>
-        <button className="register">Registriraj se</button>
+        <button className="register pointer">Registriraj se</button>
       </Link>
       </div>
     </form>

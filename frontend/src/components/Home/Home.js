@@ -171,11 +171,11 @@ const Home=()=>{
       <nav>
       <div className="header">
         <div className="title2 title-all title-design" ><img width="40" height="40" src={"../images/space-invaders.png"}/><p className='pointer'onClick={()=>{window.location.href="/class"}}>Dobrodošli</p></div>
-        <button className="link" onClick={addingStudent}>Dodaj Učenika</button>
-        {test.msg && <button className="link" onClick={topResults}>Top rezultati</button>}
-        {test.msg && <button className="link" id="stop" onClick={stopTest}>Zaustavi test</button>}
-        {!test.msg && <button className="link" id="start" onClick={startTest}>Pokreni test</button>}
-        <button className="link" onClick={logout}>Odjavi se</button>
+        <button className="link pointer" onClick={addingStudent}>Dodaj Učenika</button>
+        {test.msg && <button className="link pointer" onClick={topResults}>Top rezultati</button>}
+        {test.msg && <button className="link  pointer" id="stop" onClick={stopTest}>Zaustavi test</button>}
+        {!test.msg && <button className="link  pointer" id="start" onClick={startTest}>Pokreni test</button>}
+        <button className="link pointer" onClick={logout}>Odjavi se</button>
       </div>
     </nav>
     </div>

@@ -130,7 +130,7 @@ const TopResults =()=>{
       <nav>
       <div className="header">
         <div className="titleTopResults title-all pointer title-design"><img width="40" height="40" src={"../images/space-invaders.png"}/><p onClick={()=>goHome()}>Top rezultati</p></div>
-        <button className="link" onClick={logout}>Odjavi se</button>
+        <button className="link pointer" onClick={logout}>Odjavi se</button>
       </div>
     </nav>
       </div>

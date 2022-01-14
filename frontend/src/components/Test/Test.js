@@ -25,7 +25,7 @@ const Test =()=>{
       <span>{test.classId}</span>
       <span>{moment(test.dateOf).format('DD.MM.YYYY')}</span>
       <span>{test.status}</span>
-      <span><button className='link' onClick={()=>testResults(test.testId)}>Pregledaj</button></span>
+      <span><button className='link pointer' onClick={()=>testResults(test.testId)}>Pregledaj</button></span>
     </div>)
   })}
   </div>)

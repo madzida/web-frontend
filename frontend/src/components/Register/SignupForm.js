@@ -55,7 +55,7 @@ const SignupForm=({submitForm})=>{
       <div className="name">
         <label className="label">Ime i prezime</label>
         <input 
-        className="input" 
+        className="input capitalize" 
         name="fullname" 
         type="text" 
         value={values.fullname}
@@ -65,7 +65,7 @@ const SignupForm=({submitForm})=>{
       <div className="email">
         <label className="label">E-mail</label>
         <input 
-        className="passwordinput" 
+        className="input" 
         type="email" 
         name="email" 
         value={values.email}
@@ -75,7 +75,7 @@ const SignupForm=({submitForm})=>{
       <div className="password">
         <label className="label">Lozinka</label>
         <input 
-        className="passwordinput" 
+        className="input" 
         type="password" 
         name="password" 
         value={values.password}
@@ -85,7 +85,7 @@ const SignupForm=({submitForm})=>{
         {error2.msg && <p className="error">{error2.msg}</p>}
       </div>
       <div>
-        <button type="submit" className="submit" onClick={handleFormSubmit}>Registriraj se
+        <button type="submit" className="submit pointer" onClick={handleFormSubmit}>Registriraj se
         </button>
       </div>
     </form>
