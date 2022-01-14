@@ -141,7 +141,7 @@ const TopResults =()=>{
       <span>Uništeno čudovišta</span>
       </h5>
       <hr />
-      <div>{results.list.map((item,i)=>{return<div key={i} className={'topResult-container container-list border top10 '+colors[(Math.floor(Math.random() * 21))]}>
+      <div className="rows-toplist">{results.list.map((item,i)=>{return<div key={i} className={'topResult-container container-list top10 '+colors[(Math.floor(Math.random() * 21))]}>
         <span>{i+1}</span>
         <span>{item.name}</span>
         <span>{item.surname}</span>
