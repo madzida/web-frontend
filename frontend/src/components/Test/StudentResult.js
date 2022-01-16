@@ -40,7 +40,7 @@ const StudentResult =()=>{
     {results.list.map((item,i)=>{
       return(
       <div className="result-list container-list" key={i}>
-      <span>{item.timeTaken}</span>
+      <span>{item.timeTaken} s</span>
       <span>{item.calculation}</span>
       {item.enemyKilledStatus=="false" && <span>Nije ubijeno</span>}
       {item.enemyKilledStatus=="true" && <span>Ubijeno</span>}
