@@ -1,8 +1,9 @@
 import React,{ useState,useEffect } from 'react';
+import reactDom from 'react-dom';
 import {Link,withRouter,useLocation,useNavigate,createSearchParams} from 'react-router-dom';
 import valid from './valid';
 const AddStudent =()=>{
-  const [randomImage, setRandomImage] = useState('');
+  const token = localStorage.getItem('token')
   let location=useLocation()
   let navigate=useNavigate()
   console.log(location.state)
@@ -27,7 +28,8 @@ const AddStudent =()=>{
         fetch('https://projekt-fer.herokuapp.com/web/student/add', {
             method: 'POST',
             headers:{
-              'Content-Type':'application/json'
+              'Content-Type':'application/json',
+              'Authorization':`Bearer ${token}`
             },
             credentials: 'same-origin',
             body: JSON.stringify(values)
@@ -45,14 +47,17 @@ const AddStudent =()=>{
       
   };
   useEffect(()=>{
-    console.log(values)
+    if(values.slicica!="" && edit){
+      document.getElementById(values.slicica).style.background='#d88a40';
+    }
   },[values])
   const editStudent=(e)=>{
     e.preventDefault();
     fetch('https://projekt-fer.herokuapp.com/web/student/edit',{
       method: 'POST',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin', 
       body: JSON.stringify({name:values.ime,surname:values.prezime,pictureKey:values.slicica,studentId:location.state.studentId})
@@ -71,12 +76,16 @@ const AddStudent =()=>{
         console.log(values)
       });
   };
-  const addImage=(i,index)=>{
+  const addImage=(i,index,e)=>{
+    if(values.slicica!=""){
+      document.getElementById(values.slicica).style.background='white';
+    }
     setIndex({...index,num:index})
     setValues({
       ...values,
       slicica:i});
       console.log(values)
+    document.getElementById(i).style.background='#d88a40';
   }
   return (<div className="container"><div className="app-wrapper">
   <div >
@@ -117,7 +126,7 @@ const AddStudent =()=>{
       {errors.slicica && <p className="error">{errors.slicica}</p>} */}
       <div className='image-container'>
         {/* {location.state.image_array.map((i,ind)=><img  key={ind} src={i} width="70" height="70" onClick={()=>addImage(i,ind)}/>)} */}
-        {location.state.emoji_array.map((i,ind)=><span key={ind} className='emoji' onClick={()=>addImage(i,ind)}>{emoji.getUnicode(i)}</span>)}
+        {location.state.emoji_array.map((i,ind)=><span key={ind} className='emoji pointer'id={i} onClick={()=>addImage(i,ind)}>{emoji.getUnicode(i)}</span>)}
       </div>
       {errors.slicica && <p className="error">{errors.slicica}</p>}
     </div>

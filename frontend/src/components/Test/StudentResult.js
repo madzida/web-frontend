@@ -6,12 +6,14 @@ const StudentResult =()=>{
   let location=useLocation()
   let navigate=useNavigate()
   let list=[];
+  const token = localStorage.getItem('token')
   const [results, setResults]=useState({list:[]})
   useEffect(()=>{
     fetch('https://projekt-fer.herokuapp.com/web/test/studentCalculationsForGivenTest?studentId='+location.state.studentId+'&testId='+location.state.testId, {
       method: 'GET',
       headers:{
         'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
        withCredentials: true 
     }).then(function(response) {

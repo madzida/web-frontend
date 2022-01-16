@@ -5,9 +5,19 @@ import Header from "../Home/Header";
 const Test =()=>{
   let location=useLocation()
   let navigate=useNavigate()
+  const [state,setState]=useState({list:[]})
+  console.log(location.state)
   const testResults=(testId)=>{
       navigate("/testResults",{state:testId})
   }
+  useEffect(()=>{
+    let sortedProducts;
+    sortedProducts= [...location.state].sort((a,b)=>{
+       return parseInt(b.testId)  - parseInt(a.testId);
+    })
+    setState({list:sortedProducts})
+    console.log(state)
+  },[location.state])
   return(<div>
     <div><Header/></div>
     <h5 className="test-list container-list">
@@ -18,7 +28,7 @@ const Test =()=>{
       <span>Pregled rezultata učenika</span>
     </h5>
     <hr />
-    {location.state.map((test,i)=>{
+    {state.list.map((test,i)=>{
     return(
     <div className="test-list container-list" key={i}>
       <span>Test #{test.testId}</span>

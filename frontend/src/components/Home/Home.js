@@ -35,6 +35,7 @@ const Home=()=>{
   const emoji = require("emoji-dictionary");
   let location=useLocation();
   let navigate=useNavigate()
+  const token = localStorage.getItem('token')
   const [values,setValues]=useState({
     name:"",
     surname:"",
@@ -49,7 +50,8 @@ const Home=()=>{
     fetch('https://projekt-fer.herokuapp.com/web/class?classId='+location.state.classId, {
       method: 'GET',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin',
     }).then(function(response) {
@@ -72,7 +74,8 @@ const Home=()=>{
     fetch('https://projekt-fer.herokuapp.com/web/test/checkOngoing?classId='+location.state.classId, {
       method: 'GET',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin',
     }).then(function(response) {
@@ -86,7 +89,11 @@ const Home=()=>{
       ...values,
       [e.target.name]:e.target.value,});
   };
-  const token = localStorage.getItem('token')
+  const makeSure=(studentId)=>{
+    if (window.confirm("Želite li zaista obrisati učenika?")) {
+      deleteStudent(studentId);
+    }
+  }
   const deleteStudent=(studentId)=>{
     fetch("https://projekt-fer.herokuapp.com/web/student/remove",{
       method: 'POST',
@@ -130,7 +137,8 @@ const Home=()=>{
     fetch('https://projekt-fer.herokuapp.com/web//test/stopTest?classId='+location.state.classId, {
       method: 'GET',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin'
     }).then(function(response) {
@@ -147,7 +155,8 @@ const Home=()=>{
     fetch('https://projekt-fer.herokuapp.com/web//test/makeTest?classId='+location.state.classId, {
       method: 'GET',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin'
     }).then(function(response) {
@@ -180,7 +189,7 @@ const Home=()=>{
     </nav>
     </div>
     <div className="studentContainer">
-    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} key={i} className='flex-row'><p className="list-container" >{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="40" height="20"src={"../images/delete.svg"} onClick={()=>deleteStudent(item.studentId)}/></button><button><img width="40" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
+    <div className="margin-top"> {students.list.map((item,i) =><div id={item.studentId} key={i} className='flex-row'><p className="list-container" >{item.name} {item.surname  }<span>{emoji.getUnicode(item.pictureKey)}</span></p> <button><img width="40" height="20"src={"../images/delete.svg"} onClick={()=>makeSure(item.studentId)}/></button><button><img width="40" height="20"src={"../images/pencil.svg"} onClick={()=>editStudent(item.studentId,item.name,item.surname,item.pictureKey)}/></button></div>)}</div>
       <div className="button-container">
       </div>
       </div>

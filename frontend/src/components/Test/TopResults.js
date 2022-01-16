@@ -8,72 +8,11 @@ const TopResults =()=>{
   "color13","color14","color15","color16","color17","color18","color19","color20","color21"]
 
   const [results,setResults]=useState({list:[]});
+  const [state,setState]=useState({list:[]})
   const token = localStorage.getItem('token')
   useEffect(()=>{
     console.log(results)
   },[results])
-  const proba=[
-    {
-      "studentId":1,
-      "name":"Denis",
-      "surname":"Pipo",
-      "broj":"17"
-    },
-    {
-      "studentId":2,
-      "name":"Mateo",
-      "surname":"Dumba",
-      "broj":"16"
-    },
-    {
-      "studentId":3,
-      "name":"Ivan",
-      "surname":"Liker",
-      "broj":"14"
-    },
-    {
-      "studentId":4,
-      "name":"Paula",
-      "surname":"Vulić",
-      "broj":"11"
-    },
-    {
-      "studentId":5,
-      "name":"Denis",
-      "surname":"Pipalović",
-      "broj":"10"
-    },
-    {
-      "studentId":6,
-      "name":"Tomislav",
-      "surname":"Jagušt",
-      "broj":"8"
-    },
-    {
-      "studentId":7,
-      "name":"Jan",
-      "surname":"Roland",
-      "broj":"5"
-    },
-    {
-      "studentId":8,
-      "name":"Mirta",
-      "surname":"Vučinić",
-      "broj":"3"
-    },
-    {
-      "studentId":9,
-      "name":"Mislav",
-      "surname":"Vučinić",
-      "broj":"3"
-    },
-    {
-      "studentId":10,
-      "name":"Borna",
-      "surname":"Vučinić",
-      "broj":"1"
-    }
-  ]
   const topResults=async()=>{
         listResults=[]
         try{
@@ -87,8 +26,8 @@ const TopResults =()=>{
         })).then(function(response) {
           return response.json();
         }).then(data=>{
-          for(var i=0;i<proba.length;i++){
-            listResults[i]=proba[i]
+          for(var i=0;i<data.length;i++){
+            listResults[i]=data[i]
           
           }
           setResults({list:listResults});
@@ -107,6 +46,14 @@ const TopResults =()=>{
          
        return()=>clearInterval(interval)
   },[])
+  useEffect(()=>{
+    let sortedProducts;
+    sortedProducts= [...results.list].sort((a,b)=>{
+       return parseInt(b.broj)  - parseInt(a.broj);
+    })
+    setState({list:sortedProducts})
+    console.log(state)
+  },[results])
     const logout =()=>{
       fetch('https://projekt-fer.herokuapp.com/logout', {
         method: 'GET',
@@ -141,7 +88,7 @@ const TopResults =()=>{
       <span>Uništeno čudovišta</span>
       </h5>
       <hr />
-      <div className="rows-toplist">{results.list.map((item,i)=>{return<div key={i} className={'topResult-container container-list top10 '+colors[(Math.floor(Math.random() * 21))]}>
+      <div className="rows-toplist">{state.list.slice(0,10).map((item,i)=>{return<div key={i} className={'topResult-container container-list top10 '+colors[(Math.floor(Math.random() * 21))]}>
         <span>{i+1}</span>
         <span>{item.name}</span>
         <span>{item.surname}</span>

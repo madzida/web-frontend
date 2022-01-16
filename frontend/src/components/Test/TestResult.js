@@ -7,6 +7,7 @@ const TestResult =()=>{
   let location=useLocation()
   let navigate=useNavigate()
   let list=[];
+  const token = localStorage.getItem('token')
   const [results, setResults]=useState({list:[]})
   const optionsCursorTrueWithMargin = {
     followCursor:true,
@@ -18,6 +19,7 @@ const TestResult =()=>{
       method: 'GET',
       headers:{
         'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
        withCredentials: true 
     }).then(function(response) {

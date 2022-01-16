@@ -42,7 +42,8 @@ const Class=()=>{
     fetch('https://projekt-fer.herokuapp.com/web/makeClass',{
       method: 'POST',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin',
       body:JSON.stringify({className:classname.name,email:location.state})
@@ -59,7 +60,8 @@ const Class=()=>{
     fetch('https://projekt-fer.herokuapp.com/web/test/getTestsForClass?classId='+classId,{
       method: 'GET',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${token}`
       },
       credentials: 'same-origin',
     }).then(function(response){
