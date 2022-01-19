@@ -34,20 +34,20 @@
   align-items: center;
 }
 .title2{
-  margin-right: 380px;
-  margin-left:720px;
+  margin-right: 20%;
+  margin-left:43%;
 }
 .titleClass{
-  margin-right: 600px;
-  margin-left:720px;
+  margin-right: 32%;
+  margin-left:44%;
 }
 .titleTest{
-  margin-right: 620px;
-  margin-left:760px;
+  margin-right: 37%;
+  margin-left:45%;
 }
 .titleTopResults{
-  margin-right: 500px;
-  margin-left:720px;
+  margin-right: 30%;
+  margin-left:43%;
 }
 .name,.email,.password{
   margin: 20px;
